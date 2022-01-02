@@ -1,8 +1,11 @@
-import React, {useState} from "react"
+import axios from "axios"
+import React, {useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
 
 const Home = () => {
 	const [dataInput, setInput] = useState([])
+	// fake Data
+	const [data, setdata] = useState([])
 
 	const {register, handleSubmit} = useForm()
 	const onSubmit = (data, e) => {
@@ -15,13 +18,27 @@ const Home = () => {
 		})
 		setInput(updatedTodo)
 	}
+	// api call
+	useEffect(() => {
+		axios
+			.get("https://reqres.in/api/users?page=2")
+			.then(function (response) {
+				// handle success
+				console.log(response)
+				setdata(response.data.data)
+			})
+			.catch(function (error) {
+				// handle error
+				console.log(error)
+			})
+	}, [])
 
 	return (
 		<div className='max-w-xl mx-auto'>
 			<h1 className='text-3xl font-bold text-gray-700 underline  w-full text-center'>To-do List</h1>
 
 			{/* add here */}
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form cla onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex justify-center items-center gap-1 py-2 '>
 					<input type='text' {...register("todo")} name='todo' className='flex-1 border border-gray-200 outline-none focus:ring-transparent py-1 px-2 ' placeholder='Write to add todos' />
 					<input type='submit' className='border border-gray-200 px-4 py-1  shadow-sm bg hover:bg-gray-100 text-gray-600 font-semibold' />
@@ -39,6 +56,18 @@ const Home = () => {
 					</div>
 				)
 			})}
+
+			{/* fakedata */}
+			<div className='pt-8'>
+				<span className=' cursor-pointer text-cyan-700 '>Fake Data Name List</span>
+				{data.map((element, index) => {
+					return (
+						<div className='flex justify-between items-center gap-1 py-2 px-4 border border-gray-200 mt-2 ' key={index}>
+							<span className='text-gray-500 cursor-pointer hover:text-cyan-700'>{element.first_name}</span>
+						</div>
+					)
+				})}
+			</div>
 		</div>
 	)
 }
