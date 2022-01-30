@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, {useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
+import {Link} from "react-router-dom"
 
 const Home = () => {
 	const [dataInput, setInput] = useState([])
@@ -35,6 +36,10 @@ const Home = () => {
 
 	return (
 		<div className='max-w-xl mx-auto'>
+			<Link to='/animation' className='py-8 text-cyan-700 font-bold italic  hover:underline'>
+				Animation Test
+			</Link>
+
 			<h1 className='text-3xl font-bold text-gray-700 underline  w-full text-center'>To-do List</h1>
 
 			{/* add here */}
