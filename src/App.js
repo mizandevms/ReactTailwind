@@ -1,6 +1,7 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import "./App.css"
+import Test from "./FrontEnd/Components/ApiTest/Test"
 import Footer from "./FrontEnd/Partials/Footer/Footer"
 import Header from "./FrontEnd/Partials/Header/Header"
 
@@ -43,6 +44,22 @@ function App() {
 								// }
 							>
 								<Animation />
+							</React.Suspense>
+						}
+					/>
+						<Route						
+						path='/test'
+						element={
+							<React.Suspense
+								fallback='Loading...'
+								//{
+								// 	<div className='flex justify-center items-center h-full w-full'>
+								// 		{/* <img className=' h-56 w-auto' src={loader} alt='loader' /> */}
+								// 		l
+								// 	</div>
+								// }
+							>
+								<Test />
 							</React.Suspense>
 						}
 					/>

@@ -35,11 +35,13 @@ const Home = () => {
 	}, [])
 
 	return (
-		<div className='max-w-xl mx-auto'>
+		<div className='max-w-xl mx-auto flex flex-col space-y-4'>
 			<Link to='/animation' className='py-8 text-cyan-700 font-bold italic  hover:underline'>
 				Animation Test
 			</Link>
-
+			<Link to='/test' className='py-8 text-cyan-700 font-bold italic  hover:underline'>
+				Test
+			</Link>
 			<h1 className='text-3xl font-bold text-gray-700 underline  w-full text-center'>To-do List</h1>
 
 			{/* add here */}
