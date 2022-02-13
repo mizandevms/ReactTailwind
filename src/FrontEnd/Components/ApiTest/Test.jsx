@@ -1,37 +1,37 @@
-import axios from "axios"
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, readProductList } from "../../../Redux/actions";
 
 export default function Test() {
-	const [fakeData, setFakeData] = useState([])
+	const dispatch = useDispatch();
+	const productState = useSelector(({ product }) => product);
 
-	let dummy = []
-	console.log("dimmy", dummy)
-
-	console.log(fakeData)
-	// api call
 	useEffect(() => {
-		axios
-			.get("https://reqres.in/api/users?page=2")
-			.then(function (response) {
-				// handle success
-				console.log(response)
-				setFakeData(response.data.data)
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error)
-			})
+		console.log({productState})
+	}, [productState])
+
+	useEffect(() => {
+		fetchProductList();
 	}, [])
 
-	const handleSetValue = () => {
-		dummy = fakeData
-		console.log("dimmy", dummy)
+	const fetchProductList = async () => {
+		dispatch(readProductList({
+			page: 2
+		}))
+	}
+
+	const handleProductCreate = () => {
+		/**
+		 * Create product in redux
+		 */
+
+		dispatch(createProduct(productState.products[0]))
 	}
 
 	return (
 		<div>
-			<button onClick={() => handleSetValue()} className='capitalize text-xl font-extrabold text-cyan-700 py-4 px-6'>
-				set value
+			<button onClick={() => handleProductCreate()} className='capitalize text-xl font-extrabold text-cyan-700 py-4 px-6'>
+				Create Product
 			</button>
 		</div>
 	)
